@@ -14,7 +14,7 @@ long_description = (
     '.. contents::\n'
     + '\n' +
     read('collective', 'recipe', 'pip', 'README.txt')
-    + '\n' +
+    + '\n\n' +
     read('CONTRIBUTORS.txt')
     + '\n' +
     read('CHANGES.txt')
