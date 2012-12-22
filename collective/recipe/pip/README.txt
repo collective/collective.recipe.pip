@@ -21,12 +21,20 @@ Let's create test config files
     ... """
     ... some.egg
     ... -e http://some.package.git.url#egg=develop.egg
+    ... fabric>=0.9b1
+    ... # some comment
+    ... xlrd # reading excel worksheets
+    ... html5lib==0.95
     ... """)
 
     >>> write('requirements2.txt',
     ... """
     ... some2.egg
+    ... django>=1.3,<1.4
+    ... django-extensions #django extension requirements (not mandatory, but useful on dev)
     ... -e http://some2.package.git.url#egg=develop2.egg
+    ... --extra-index-url=http://some.index.url
+    ... -f http://git.fabfile.org
     ... """)
 
 
@@ -60,7 +68,10 @@ Running the buildout gives us::
     >>> print 'start', system(buildout)
     start...
     some.egg
-    develop.egg
+    fabric>=0.9b1
+    xlrd
+    html5lib==0.95
     some2.egg
-    develop2.egg
+    django>=1.3,<1.4
+    django-extensions
     <BLANKLINE>

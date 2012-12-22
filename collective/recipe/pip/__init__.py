@@ -28,14 +28,21 @@ class Recipe(object):
 
     def parse_line(self, line):
         """Parse single line."""
-        return itertools.ifilter(None, itertools.imap(self.parse_token, line.split()))
+        if any(map(line.startswith, ('#', '-f'))):
+            raise StopIteration()
+
+        for token in line.split():
+            yield self.parse_token(token)
 
     def parse_token(self, token):
         """Parse single token"""
-        if token and not token.startswith('-'):
+        if token and not token[0] in ('-', '#'):
             if '#egg=' in token:
                 return token.split('#egg=')[1]
+            if '#' in token:
+                raise StopIteration()
             return token
+        raise StopIteration()
 
     update = install
 

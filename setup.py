@@ -5,11 +5,10 @@ This module contains the tool of collective.recipe.pip
 import os
 from setuptools import setup, find_packages
 
-
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.1.0'
+version = '0.1.1'
 
 long_description = (
     '.. contents::\n'
@@ -48,7 +47,8 @@ setup(name='collective.recipe.pip',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
-                        'zc.buildout'
+                        'zc.buildout',
+                        'pip',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
