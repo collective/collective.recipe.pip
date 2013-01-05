@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.2 (2013-01-05)
+------------------
+
+- Added filling versions part with parsed versions
+
+
 0.1.1 (2012-12-22)
 ------------------
 

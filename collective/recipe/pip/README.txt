@@ -41,7 +41,7 @@ Let's create test config files
 We'll start by creating a buildout that uses the recipe::
 
     >>> write('buildout.cfg',
-    ... """
+    ... r"""
     ... [buildout]
     ... parts = pip print
     ...
@@ -52,11 +52,16 @@ We'll start by creating a buildout that uses the recipe::
     ... recipe = collective.recipe.pip
     ... configs = requirements.txt
     ...           requirements2.txt
+    ... versions = versions
+    ...
+    ... [versions]
     ...
     ... [print]
     ... recipe = mr.scripty
     ... install =
     ...     ... print self.buildout['some-section']['eggs']
+    ...     ... print '\n[versions]'
+    ...     ... print '\n'.join(map(lambda (i, k): (i + ' = ' + k), self.buildout['versions'].items()))
     ...     ... return []
     ... """)
 
@@ -74,4 +79,9 @@ Running the buildout gives us::
     some2.egg
     django>=1.3,<1.4
     django-extensions
+    <BLANKLINE>
+    [versions]
+    django = >=1.3,<1.4
+    fabric = >=0.9b1
+    html5lib = 0.95
     <BLANKLINE>

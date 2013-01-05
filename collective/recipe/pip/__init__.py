@@ -8,6 +8,7 @@ class Recipe(object):
 
     def __init__(self, buildout, name, options):
         self.options = options
+        self.buildout = buildout
         self.process()
 
     def install(self):
@@ -16,7 +17,29 @@ class Recipe(object):
 
     def process(self):
         """Process everything"""
-        self.options['eggs'] = "\n".join(self.parse_files(self.options.get('configs').split()))
+        eggs = []
+        versions = []
+        for token in self.parse_files(self.options.get('configs').split()):
+            #save fixed versions
+            egg = version = None
+            try:
+                egg, version = token.split('==')
+            except ValueError:
+                try:
+                    egg, version = token.split('>')
+                    version = '>' + version
+                except ValueError:
+                    pass
+            eggs.append(token)
+            if version:
+                versions.append((egg, version))
+
+        self.options['eggs'] = "\n".join(eggs)
+        versions_part_name = self.options.get('versions')
+        if versions_part_name:
+            versions_part = self.buildout[versions_part_name]
+            for egg, version in versions:
+                versions_part.setdefault(egg, version)
 
     def parse_files(self, files):
         """Parse files."""
