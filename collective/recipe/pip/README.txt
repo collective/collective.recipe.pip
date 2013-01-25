@@ -27,8 +27,20 @@ Let's create test config files
     ... html5lib==0.95
     ... """)
 
+    >>> write('requirements-included.txt',
+    ... """
+    ... some.included.egg
+    ... """)
+
+    >>> write('requirements-included2.txt',
+    ... """
+    ... some.included.egg2
+    ... """)
+
     >>> write('requirements2.txt',
     ... """
+    ... -r requirements-included.txt
+    ... --requirement requirements-included2.txt
     ... some2.egg
     ... django>=1.3,<1.4
     ... django-extensions #django extension requirements (not mandatory, but useful on dev)
@@ -72,13 +84,17 @@ Running the buildout gives us::
 
     >>> print 'start', system(buildout)
     start...
-    some.egg
-    fabric>=0.9b1
-    xlrd
-    html5lib==0.95
-    some2.egg
-    django>=1.3,<1.4
+    develop.egg
+    develop2.egg
     django-extensions
+    django>=1.3,<1.4
+    fabric>=0.9b1
+    html5lib==0.95
+    some.egg
+    some.included.egg
+    some.included.egg2
+    some2.egg
+    xlrd
     <BLANKLINE>
     [versions]
     django = >=1.3,<1.4

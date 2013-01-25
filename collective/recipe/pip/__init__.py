@@ -2,9 +2,14 @@
 """Recipe pip."""
 import os
 import itertools
+from pip import req 
+
 
 class Recipe(object):
     """zc.buildout recipe"""
+
+    default_vcs = 'git'
+    skip_requirements_regex = ''
 
     def __init__(self, buildout, name, options):
         self.options = options
@@ -19,22 +24,17 @@ class Recipe(object):
         """Process everything"""
         eggs = []
         versions = []
-        for token in self.parse_files(self.options.get('configs').split()):
-            #save fixed versions
-            egg = version = None
-            try:
-                egg, version = token.split('==')
-            except ValueError:
-                try:
-                    egg, version = token.split('>')
-                    version = '>' + version
-                except ValueError:
-                    pass
-            eggs.append(token)
-            if version:
-                versions.append((egg, version))
+        urls = []
+        for requirement in self.parse_files(self.options.get('configs').split()):
+            specs = ','.join([''.join(s) for s in requirement.req.specs])
+            eggs.append(requirement.name + specs)
+            if specs:
+                versions.append((requirement.name, specs[2:] if specs.startswith('=') else specs))
+            if requirement.editable:
+                urls.append(requirement.url)
 
-        self.options['eggs'] = "\n".join(eggs)
+        self.options['eggs'] = "\n".join(sorted(set(eggs)))
+        self.options['urls'] = "\n".join(sorted(set(urls)))
         versions_part_name = self.options.get('versions')
         if versions_part_name:
             versions_part = self.buildout[versions_part_name]
@@ -47,25 +47,10 @@ class Recipe(object):
 
     def parse_file(self, file):
         """Parse single file."""
-        return itertools.chain.from_iterable(itertools.imap(self.parse_line, open(file).xreadlines()))
-
-    def parse_line(self, line):
-        """Parse single line."""
-        if any(map(line.startswith, ('#', '-f'))):
-            raise StopIteration()
-
-        for token in line.split():
-            yield self.parse_token(token)
-
-    def parse_token(self, token):
-        """Parse single token"""
-        if token and not token[0] in ('-', '#'):
-            if '#egg=' in token:
-                return token.split('#egg=')[1]
-            if '#' in token:
-                raise StopIteration()
-            return token
-        raise StopIteration()
-
+        try:
+            return req.parse_requirements(file, options = self)
+        except SystemExit:
+            raise RuntimeError("Can't parse {0}".format(file))
+        
     update = install
 
