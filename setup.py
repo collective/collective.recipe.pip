@@ -11,6 +11,7 @@ def read(*rnames):
 version = '0.1.4'
 
 long_description = (
+    '.. -*-rst-*-\n'
     '.. contents::\n'
     + '\n' +
     read('collective', 'recipe', 'pip', 'README.txt')
