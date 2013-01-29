@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.1.3'
+version = '0.1.4'
 
 long_description = (
     '.. contents::\n'
@@ -40,7 +40,7 @@ setup(name='collective.recipe.pip',
       keywords='zc.buildout buildout recipe',
       author='Anatoly Bubenkov',
       author_email='bubenkoff@gmail.com',
-      url='http://github.com/bubenkoff/collective.recipe.pip',
+      url='http://github.com/collective/collective.recipe.pip',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective', 'collective.recipe'],
