@@ -83,7 +83,8 @@ option.
 Running the buildout gives us::
 
     >>> print 'start', system(buildout)
-    start...
+    start Installing pip.
+    Installing print.
     develop.egg
     develop2.egg
     django-extensions
@@ -96,8 +97,4 @@ Running the buildout gives us::
     some2.egg
     xlrd
     <BLANKLINE>
-    [versions]
-    django = >=1.3,<1.4
-    fabric = >=0.9b1
-    html5lib = 0.95
-    <BLANKLINE>
+    ...

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.5 (2013-02-18)
+
+- Buildout 2.0.1 support added
+
+
 0.1.4 (2013-01-29)
 
 - Fixed the home URL, remove unnecessary README.txt
