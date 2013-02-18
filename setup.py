@@ -5,10 +5,11 @@ This module contains the tool of collective.recipe.pip
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.1.4'
+version = '0.1.5'
 
 long_description = (
     '.. -*-rst-*-\n'
@@ -24,7 +25,7 @@ long_description = (
 entry_point = 'collective.recipe.pip:Recipe'
 entry_points = {"zc.buildout": ["default = %s" % entry_point]}
 
-tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty']
+tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty', 'manuel']
 
 setup(name='collective.recipe.pip',
       version=version,
@@ -33,11 +34,11 @@ setup(name='collective.recipe.pip',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        'Framework :: Buildout',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        ],
+          'Framework :: Buildout',
+          'Intended Audience :: Developers',
+          'Topic :: Software Development :: Build Tools',
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+      ],
       keywords='zc.buildout buildout recipe',
       author='Anatoly Bubenkov',
       author_email='bubenkoff@gmail.com',

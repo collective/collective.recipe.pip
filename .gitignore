@@ -1,6 +1,6 @@
 *.py[cod]
 .idea
-project.sublime-workspace
+/*.sublime-workspace
 .codeintel
 
 # C extensions
