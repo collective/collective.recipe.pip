@@ -21,6 +21,7 @@ Let's create test config files
     ... """
     ... some.egg
     ... -e http://some.package.git.url#egg=develop.egg
+    ... http://sourceforge.net/projects/pychecker/files/latest/download?source=files#egg=pychecker==0.8.19
     ... fabric>=0.9b1
     ... # some comment
     ... xlrd # reading excel worksheets
@@ -91,6 +92,7 @@ Running the buildout gives us::
     django>=1.3,<1.4
     fabric>=0.9b1
     html5lib==0.95
+    pychecker==0.8.19
     some.egg
     some.included.egg
     some.included.egg2

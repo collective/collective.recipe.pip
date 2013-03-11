@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.6 (2013-03-11)
+
+- Unpredictable requirements parse case fixed
+
+
 0.1.5 (2013-02-18)
 
 - Buildout 2.0.1 support added

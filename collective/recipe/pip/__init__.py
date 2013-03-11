@@ -26,6 +26,9 @@ class Recipe(object):
         versions = []
         urls = []
         for requirement in self.parse_files(self.options.get('configs').split()):
+            if requirement.req is None:
+                # strange case, sometimes happen
+                continue
             specs = ','.join([''.join(s) for s in requirement.req.specs])
             eggs.append(requirement.name + specs)
             if specs:
