@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.7 (2013-06-27)
+
+- Support custom url-eggs to be seen in the urls param
+
+
 0.1.6 (2013-03-11)
 
 - Unpredictable requirements parse case fixed

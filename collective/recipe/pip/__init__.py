@@ -2,7 +2,7 @@
 """Recipe pip."""
 import os
 import itertools
-from pip import req 
+from pip import req
 
 
 class Recipe(object):
@@ -35,6 +35,8 @@ class Recipe(object):
                 versions.append((requirement.name, specs[2:] if specs.startswith('=') else specs))
             if requirement.editable:
                 urls.append(requirement.url)
+            elif requirement.url:
+                urls.append('{0}#egg={1}{2}'.format(requirement.url, requirement.name, specs))
 
         self.options['eggs'] = "\n".join(sorted(set(eggs)))
         self.options['urls'] = "\n".join(sorted(set(urls)))
@@ -54,6 +56,6 @@ class Recipe(object):
             return req.parse_requirements(file, options = self)
         except SystemExit:
             raise RuntimeError("Can't parse {0}".format(file))
-        
+
     update = install
 

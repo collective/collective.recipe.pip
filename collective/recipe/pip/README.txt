@@ -7,6 +7,10 @@ in other parts of the buildout.
 The recipe mirrors the parsed eggs list into its section, so that e.g.
 ``${pip:eggs}`` will give the list of parsed eggs.
 
+The list of eggs which come from urls (eg from github) are also exported to the urls param:
+``${pip:urls}`` will give the list of parsed egg urls.
+
+
 For now single option of the recipe is ``configs`` - list of config files to parse.
 
 The config files are parsed during the initialization of the ``Recipe`` instance,
@@ -75,6 +79,8 @@ We'll start by creating a buildout that uses the recipe::
     ...     ... print self.buildout['some-section']['eggs']
     ...     ... print '\n[versions]'
     ...     ... print '\n'.join(map(lambda (i, k): (i + ' = ' + k), self.buildout['versions'].items()))
+    ...     ... print '\n[urls]'
+    ...     ... print self.buildout['pip']['urls']
     ...     ... return []
     ... """)
 
@@ -98,5 +104,15 @@ Running the buildout gives us::
     some.included.egg2
     some2.egg
     xlrd
-    <BLANKLINE>
+    [versions]
+    zc.buildout = ...
+    zc.recipe.egg = ...
+    pychecker = 0.8.19
+    fabric = >=0.9b1
+    django = >=1.3,<1.4
+    html5lib = 0.95
+    [urls]
+    git+http://some.package.git.url#egg=develop.egg
+    git+http://some2.package.git.url#egg=develop2.egg
+    http://sourceforge.net/projects/pychecker/files/latest/download?source=files#egg=pychecker==0.8.19
     ...
