@@ -25,7 +25,7 @@ long_description = (
 entry_point = 'collective.recipe.pip:Recipe'
 entry_points = {"zc.buildout": ["default = %s" % entry_point]}
 
-tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty', 'manuel']
+tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty', 'manuel', 'z3c.coverage']
 
 setup(name='collective.recipe.pip',
       version=version,
