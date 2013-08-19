@@ -1,7 +1,7 @@
 language: python
 # command to install dependencies
 install:
-    - pip install tox
+    - pip install tox distribute -U
     - python bootstrap.py
     - bin/buildout
 # # command to run tests
