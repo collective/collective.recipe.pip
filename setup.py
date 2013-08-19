@@ -13,13 +13,16 @@ version = '0.1.7'
 
 long_description = (
     '.. -*-rst-*-\n'
+    + '\n' +
+    read('README.rst')
+    + '\n' +
     '.. contents::\n'
     + '\n' +
-    read('collective', 'recipe', 'pip', 'README.txt')
+    read('collective', 'recipe', 'pip', 'README.rst')
     + '\n\n' +
-    read('CONTRIBUTORS.txt')
+    read('CONTRIBUTORS.rst')
     + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
 )
 
 entry_point = 'collective.recipe.pip:Recipe'

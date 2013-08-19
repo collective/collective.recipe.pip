@@ -81,6 +81,7 @@ We'll start by creating a buildout that uses the recipe::
     ...     ... print '\n'.join(map(lambda (i, k): (i + ' = ' + k), self.buildout['versions'].items()))
     ...     ... print '\n[urls]'
     ...     ... print self.buildout['pip']['urls']
+    ...     ... print '# done'
     ...     ... return []
     ... """)
 
@@ -89,8 +90,10 @@ option.
 
 Running the buildout gives us::
 
-    >>> print 'start', system(buildout)
-    start Installing pip.
+    >>> import sys
+    >>> sys.stdout.write('start\n' + system(buildout))
+    start...
+    Installing pip.
     Installing print.
     develop.egg
     develop2.egg

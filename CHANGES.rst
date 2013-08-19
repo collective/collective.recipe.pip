@@ -2,26 +2,31 @@ Changelog
 =========
 
 0.1.7 (2013-06-27)
+------------------
 
 - Support custom url-eggs to be seen in the urls param
 
 
 0.1.6 (2013-03-11)
+------------------
 
 - Unpredictable requirements parse case fixed
 
 
 0.1.5 (2013-02-18)
+------------------
 
 - Buildout 2.0.1 support added
 
 
 0.1.4 (2013-01-29)
+------------------
 
 - Fixed the home URL, remove unnecessary README.txt
 
 
 0.1.3 (2013-01-25)
+------------------
 
 - Refactored parsing to use native pip config parser, so now it's possible to nest configs via -r just like using pip
 

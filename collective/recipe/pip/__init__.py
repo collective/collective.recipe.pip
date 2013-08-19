@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Recipe pip."""
-import os
 import itertools
 from pip import req
 
@@ -48,14 +47,13 @@ class Recipe(object):
 
     def parse_files(self, files):
         """Parse files."""
-        return itertools.chain.from_iterable(itertools.imap(self.parse_file, files))
+        return itertools.chain.from_iterable((self.parse_file(file) for file in files))
 
     def parse_file(self, file):
         """Parse single file."""
         try:
-            return req.parse_requirements(file, options = self)
+            return req.parse_requirements(file, options=self)
         except SystemExit:
             raise RuntimeError("Can't parse {0}".format(file))
 
     update = install
-

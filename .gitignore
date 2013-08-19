@@ -13,8 +13,9 @@ dist
 build
 eggs
 parts
-bin
+/bin
 var
+/include
 sdist
 develop-eggs
 .installed.cfg
@@ -23,6 +24,8 @@ lib64
 htmlcov
 .Python
 include
+=======
+/.Python
 
 # Installer logs
 pip-log.txt
