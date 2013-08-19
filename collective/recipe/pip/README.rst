@@ -85,7 +85,7 @@ We'll start by creating a buildout that uses the recipe::
     ...     ... return []
     ... """)
 
-The `mr.scripty`_ recipe is used to print out the value of the ${some-section:some-option}
+The `mr.scripty` recipe is used to print out the value of the ${some-section:some-option}
 option.
 
 Running the buildout gives us::
