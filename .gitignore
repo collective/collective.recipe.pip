@@ -22,9 +22,7 @@ develop-eggs
 lib
 lib64
 htmlcov
-.Python
 include
-=======
 /.Python
 
 # Installer logs
