@@ -16,6 +16,7 @@ For now single option of the recipe is ``configs`` - list of config files to par
 The config files are parsed during the initialization of the ``Recipe`` instance,
 i.e. after ``buildout.cfg`` is read but before any recipe is installed or updated.
 
+
 Example usage: Use an environment variable
 ==========================================
 
