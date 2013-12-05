@@ -6,6 +6,20 @@ import os
 from pip import req
 
 
+old_parse_requirements = req.parse_requirements
+
+
+def parse_requirements(filename, *kv, **kw):
+    """Override requirements parsing."""
+    file_dir = os.path.dirname(filename)
+    if os.path.isdir(os.path.dirname(filename)):
+        os.chdir(file_dir)
+    return old_parse_requirements(filename, *kv, **kw)
+
+
+req.parse_requirements = parse_requirements
+
+
 class Recipe(object):
     """zc.buildout recipe"""
 
@@ -54,14 +68,13 @@ class Recipe(object):
     def parse_file(self, file):
         """Parse single file."""
         try:
-            dir = os.getcwd()
             file_dir = os.path.dirname(file)
             if os.path.exists(file_dir):
                 os.chdir(file_dir)
             try:
                 return req.parse_requirements(file, options=self)
             finally:
-                os.chdir(dir)
+                os.chdir(self.buildout['buildout']['directory'])
         except SystemExit:
             raise RuntimeError("Can't parse {0}".format(file))
 
