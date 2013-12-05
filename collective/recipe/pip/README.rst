@@ -43,6 +43,13 @@ Let's create test config files
     ... some.included.egg2
     ... """)
 
+    >>> mkdir('file.package')
+    >>> write('file.package/setup.py',
+    ... """
+    ... from setuptools import setup
+    ... setup(name='file.package')
+    ... """)
+
     >>> write('requirements2.txt',
     ... """
     ... -r requirements-included.txt
@@ -51,6 +58,7 @@ Let's create test config files
     ... django>=1.3,<1.4
     ... django-extensions #django extension requirements (not mandatory, but useful on dev)
     ... -e http://some2.package.git.url#egg=develop2.egg
+    ... -e file.package
     ... --extra-index-url=http://some.index.url
     ... -f http://git.fabfile.org
     ... """)
@@ -116,6 +124,7 @@ Running the buildout gives us::
     django = >=1.3,<1.4
     html5lib = 0.95
     [urls]
+    /sample-buildout/file.package
     git+http://some.package.git.url#egg=develop.egg
     git+http://some2.package.git.url#egg=develop2.egg
     http://sourceforge.net/projects/pychecker/files/latest/download?source=files#egg=pychecker==0.8.19

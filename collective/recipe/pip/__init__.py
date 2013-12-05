@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Recipe pip."""
 import itertools
+import os
+
 from pip import req
 
 
@@ -25,11 +27,11 @@ class Recipe(object):
         versions = []
         urls = []
         for requirement in self.parse_files(self.options.get('configs').split()):
-            if requirement.req is None:
-                # strange case, sometimes happen
-                continue
-            specs = ','.join([''.join(s) for s in requirement.req.specs])
-            eggs.append(requirement.name + specs)
+            if requirement.req is not None:
+                specs = ','.join([''.join(s) for s in requirement.req.specs])
+                eggs.append(requirement.name + specs)
+            else:
+                specs = None
             if specs:
                 versions.append((requirement.name, specs[2:] if specs.startswith('=') else specs))
             if requirement.editable:
@@ -52,7 +54,14 @@ class Recipe(object):
     def parse_file(self, file):
         """Parse single file."""
         try:
-            return req.parse_requirements(file, options=self)
+            dir = os.getcwd()
+            file_dir = os.path.dirname(file)
+            if os.path.exists(file_dir):
+                os.chdir(file_dir)
+            try:
+                return req.parse_requirements(file, options=self)
+            finally:
+                os.chdir(dir)
         except SystemExit:
             raise RuntimeError("Can't parse {0}".format(file))
 
