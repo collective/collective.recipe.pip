@@ -88,7 +88,7 @@ We'll start by creating a buildout that uses the recipe::
     ... install =
     ...     ... print self.buildout['some-section']['eggs']
     ...     ... print '\n[versions]'
-    ...     ... print '\n'.join(map(lambda (i, k): (i + ' = ' + k), self.buildout['versions'].items()))
+    ...     ... print '\n'.join(map(lambda (i, k): (i + ' = ' + k), sorted(self.buildout['versions'].items())))
     ...     ... print '\n[urls]'
     ...     ... print self.buildout['pip']['urls']
     ...     ... print '# done'
@@ -118,12 +118,12 @@ Running the buildout gives us::
     some2.egg
     xlrd
     [versions]
+    django = >=1.3,<1.4
+    fabric = >=0.9b1
+    html5lib = 0.95
+    pychecker = 0.8.19
     zc.buildout = ...
     zc.recipe.egg = ...
-    pychecker = 0.8.19
-    fabric = >=0.9b1
-    django = >=1.3,<1.4
-    html5lib = 0.95
     [urls]
     /sample-buildout/file.package
     git+http://some.package.git.url#egg=develop.egg
