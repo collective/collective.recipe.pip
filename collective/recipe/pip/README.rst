@@ -26,6 +26,7 @@ Let's create test config files
     ... """
     ... some.egg
     ... -e http://some.package.git.url#egg=develop.egg
+    ... --use-wheel
     ... http://sourceforge.net/projects/pychecker/files/latest/download?source=files#egg=pychecker==0.8.19
     ... fabric>=0.9b1
     ... # some comment

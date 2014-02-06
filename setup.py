@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '0.1.9'
+version = '0.2.0'
 
 long_description = (
     read('README.rst')
@@ -26,7 +26,7 @@ long_description = (
 entry_point = 'collective.recipe.pip:Recipe'
 entry_points = {"zc.buildout": ["default = %s" % entry_point]}
 
-tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty', 'manuel', 'z3c.coverage']
+tests_require = ['zope.testing', 'zc.buildout', 'mr.scripty', 'manuel', 'z3c.coverage', 'zope.interface']
 
 setup(name='collective.recipe.pip',
       version=version,
@@ -51,7 +51,7 @@ setup(name='collective.recipe.pip',
       zip_safe=False,
       install_requires=['setuptools',
                         'zc.buildout',
-                        'pip'
+                        'pip',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

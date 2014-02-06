@@ -29,6 +29,8 @@ class Recipe(object):
     def __init__(self, buildout, name, options):
         self.options = options
         self.buildout = buildout
+        self.index_urls = []
+        self.find_links = []
         self.process()
 
     def install(self):
@@ -72,7 +74,7 @@ class Recipe(object):
             if os.path.exists(file_dir):
                 os.chdir(file_dir)
             try:
-                return req.parse_requirements(file, options=self)
+                return req.parse_requirements(file, options=self, finder=self)
             finally:
                 os.chdir(self.buildout['buildout']['directory'])
         except SystemExit:
