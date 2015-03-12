@@ -4,6 +4,7 @@ import itertools
 import os
 
 from pip import req
+from pip.download import PipSession
 
 
 old_parse_requirements = req.parse_requirements
@@ -31,6 +32,7 @@ class Recipe(object):
         self.buildout = buildout
         self.index_urls = []
         self.find_links = []
+        self.isolated_mode = options.get('isolated_mode') == 'true'
         self.process()
 
     def install(self):
@@ -74,7 +76,7 @@ class Recipe(object):
             if os.path.exists(file_dir):
                 os.chdir(file_dir)
             try:
-                return req.parse_requirements(file, options=self, finder=self)
+                return req.parse_requirements(file, options=self, finder=self, session=PipSession())
             finally:
                 os.chdir(self.buildout['buildout']['directory'])
         except SystemExit:
