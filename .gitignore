@@ -2,7 +2,8 @@
 .idea
 /*.sublime-workspace
 .codeintel
-
+/.env
+/.eggs
 # C extensions
 *.so
 

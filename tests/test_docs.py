@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Doctest runner for 'collective.recipe.pip'.
-"""
+"""Doctest runner for 'collective.recipe.pip'."""
 __docformat__ = 'restructuredtext'
 
 import unittest

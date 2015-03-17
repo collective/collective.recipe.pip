@@ -55,8 +55,10 @@ class Recipe(object):
             if requirement.editable:
                 urls.append(requirement.url)
             elif requirement.url:
-                urls.append('{0}#egg={1}{2}'.format(requirement.url, requirement.name, specs))
-
+                if not '#egg=' in requirement.url:
+                    urls.append('{0}#egg={1}{2}'.format(requirement.url, requirement.name, specs))
+                else:
+                    urls.append(requirement.url)
         self.options['eggs'] = "\n".join(sorted(set(eggs)))
         self.options['urls'] = "\n".join(sorted(set(urls)))
         versions_part_name = self.options.get('versions')
