@@ -4,7 +4,9 @@
 
 # install all needed for development
 develop: .env
-	.env/bin/pip install -e . -r requirements-testing.txt tox
+	.env/bin/python bootstrap.py
+	.env/bin/pip install -e . tox
+	bin/buildout
 
 # clean the development envrironment
 clean:
