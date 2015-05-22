@@ -32,6 +32,7 @@ class Recipe(object):
         self.buildout = buildout
         self.index_urls = []
         self.find_links = []
+        self.format_control = None
         self.isolated_mode = options.get('isolated_mode') == 'true'
         self.process()
 
@@ -44,7 +45,8 @@ class Recipe(object):
         eggs = []
         versions = []
         urls = []
-        for requirement in self.parse_files(self.options.get('configs').split()):
+        for _req in self.parse_files(self.options.get('configs').split()):
+            requirement = DownloadedReq(_req)
             if requirement.req is not None:
                 specs = ','.join([''.join(s) for s in requirement.req.specs])
                 eggs.append(requirement.name + specs)
@@ -85,3 +87,26 @@ class Recipe(object):
             raise RuntimeError("Can't parse {0}".format(file))
 
     update = install
+
+
+class DownloadedReq(object):
+    """A wrapper around InstallRequirement"""
+
+    def __init__(self, req):
+        self._req = req
+
+    def __getattr__(self, attr):
+        return getattr(self._req, attr)
+
+    def _link(self):
+        try:
+            return self._req.link
+        except AttributeError:
+            # The link attribute isn't available prior to pip 6.1.0, so fall
+            # back to the now deprecated 'url' attribute.
+            return self._req.url if self._req.url else None
+
+    @property
+    def url(self):
+        link = self._link()
+        return link.url if link else None
