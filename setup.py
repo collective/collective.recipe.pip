@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 """This module contains the tool of collective.recipe.pip."""
+import codecs
 import os
+
 from setuptools import setup, find_packages
 
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    """Read the file name."""
+    with codecs.open(os.path.join(os.path.dirname(__file__), *rnames), encoding='utf-8') as fd:
+        return fd.read()
 
-version = '0.3.0'
+version = '0.3.1'
 
 long_description = (
     read('README.rst')

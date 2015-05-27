@@ -1,10 +1,16 @@
 Changelog
 =========
 
+0.3.1 (2015-05-27)
+------------------
+
+- Support recent pip (7.x.x) (ridha)
+
+
 0.3.0 (2015-03-17)
 ------------------
 
-- Support recent pip (ridha)
+- Support recent pip (6.x.x) (ridha)
 
 
 0.2.0 (2014-02-06)
