@@ -10,6 +10,9 @@ script: tox
 after_success:
   - bin/coverage run bin/test
   - bin/coveralls
+branches:
+    except:
+        - /^\d/
 notifications:
     email:
         - bubenkoff@gmail.com
