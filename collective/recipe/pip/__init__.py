@@ -4,7 +4,11 @@ import itertools
 import os
 
 from pip import req
-from pip.download import PipSession
+try:
+    from pip.download import PipSession
+    has_pipsession = True
+except ImportError:
+    has_pipsession = False
 
 
 old_parse_requirements = req.parse_requirements
@@ -57,7 +61,7 @@ class Recipe(object):
             if requirement.editable:
                 urls.append(requirement.url)
             elif requirement.url:
-                if not '#egg=' in requirement.url:
+                if '#egg=' not in requirement.url:
                     urls.append('{0}#egg={1}{2}'.format(requirement.url, requirement.name, specs))
                 else:
                     urls.append(requirement.url)
@@ -80,7 +84,11 @@ class Recipe(object):
             if os.path.exists(file_dir):
                 os.chdir(file_dir)
             try:
-                return req.parse_requirements(file, options=self, finder=self, session=PipSession())
+                if has_pipsession:
+                    return req.parse_requirements(file, options=self, finder=self,
+                                                  session=PipSession())
+                else:
+                    return req.parse_requirements(file, options=self, finder=self)
             finally:
                 os.chdir(self.buildout['buildout']['directory'])
         except SystemExit:
