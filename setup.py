@@ -11,7 +11,7 @@ def read(*rnames):
     with codecs.open(os.path.join(os.path.dirname(__file__), *rnames), encoding='utf-8') as fd:
         return fd.read()
 
-version = '0.3.1'
+version = '0.3.2'
 
 long_description = (
     read('README.rst')
@@ -45,7 +45,7 @@ setup(
     author_email='bubenkoff@gmail.com',
     url='http://github.com/collective/collective.recipe.pip',
     license='GPL',
-    packages=find_packages(exclude=['ez_setup']),
+    packages=find_packages(exclude=['ez_setup', 'tests']),
     namespace_packages=['collective', 'collective.recipe'],
     include_package_data=True,
     zip_safe=False,

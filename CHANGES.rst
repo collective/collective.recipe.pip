@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.3.2 (2015-07-19)
+------------------
+
+- Backward compatibility for older pip (ccomb)
+
 0.3.1 (2015-05-27)
 ------------------
 

@@ -1,16 +1,14 @@
 language: python
 sudo: false
 # command to install dependencies
-install:
-    - pip install tox
-    - pip install -U setuptools
-    - python bootstrap.py
-    - bin/buildout
+install: "pip install -U tox"
 # # command to run tests
-script: tox
-after_success:
-  - bin/coverage run bin/test
-  - bin/coveralls
+env:
+  matrix:
+    - TESTENV=py26
+    - TESTENV=py27
+    - TESTENV=py34
+    - TESTENV=coveralls
 branches:
     except:
         - /^\d/
