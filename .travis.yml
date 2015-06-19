@@ -1,7 +1,7 @@
 language: python
 sudo: false
 # command to install dependencies
-install: "pip install -U tox"
+install: "pip install -U tox setuptools"
 # # command to run tests
 env:
   matrix:
