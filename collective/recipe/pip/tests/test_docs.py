@@ -28,7 +28,7 @@ def test_suite():
     suite = unittest.TestSuite(
         (
             doctest.DocFileSuite(
-                '../README.rst',
+                '../../../../README.rst',
                 setUp=setUp,
                 tearDown=zc.buildout.testing.buildoutTearDown,
                 optionflags=optionflags,

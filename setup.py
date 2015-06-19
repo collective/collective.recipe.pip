@@ -57,7 +57,7 @@ setup(
     ],
     tests_require=tests_require,
     extras_require=dict(tests=tests_require),
-    test_suite='tests.test_docs.test_suite',
+    test_suite='collective.recipe.pip.tests.test_docs.test_suite',
     entry_points=entry_points,
     dependency_links=[
         'https://github.com/minddistrict/mr.scripty/archive/4bbfa2b48b7bc8a215c80a19e61ac39d0c9545aa.zip#egg=mr.scripty'
