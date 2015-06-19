@@ -8,7 +8,7 @@ env:
     - TESTENV=py27
     - TESTENV=py34
     - TESTENV=coveralls
-script: "tox -e $TESTENV"
+script: "tox --recreate -e $TESTENV"
 branches:
     except:
         - /^\d/
