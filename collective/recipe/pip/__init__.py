@@ -52,7 +52,11 @@ class Recipe(object):
         for _req in self.parse_files(self.options.get('configs').split()):
             requirement = DownloadedReq(_req)
             if requirement.req is not None:
-                specs = ','.join([''.join(s) for s in requirement.req.specs])
+                if hasattr(requirement.req, 'specs'):
+                    version_spec = requirement.req.specs
+                else:
+                    version_spec = [(spec.operator, spec.version) for spec in requirement.req.specifier]
+                specs = ','.join([''.join(s) for s in version_spec])
                 eggs.append(requirement.name + specs)
             else:
                 specs = None
@@ -65,8 +69,10 @@ class Recipe(object):
                     urls.append('{0}#egg={1}{2}'.format(requirement.url, requirement.name, specs))
                 else:
                     urls.append(requirement.url)
-        self.options['eggs'] = "\n".join(sorted(set(eggs)))
-        self.options['urls'] = "\n".join(sorted(set(urls)))
+
+        # Buildout Option values must be strings
+        self.options['eggs'] = "\n".join(sorted(set(eggs))).encode('utf-8')
+        self.options['urls'] = "\n".join(sorted(set(urls))).encode('utf-8')
         versions_part_name = self.options.get('versions')
         if versions_part_name:
             versions_part = self.buildout[versions_part_name]
