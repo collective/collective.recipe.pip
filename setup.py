@@ -11,7 +11,7 @@ def read(*rnames):
     with codecs.open(os.path.join(os.path.dirname(__file__), *rnames), encoding='utf-8') as fd:
         return fd.read()
 
-version = '0.3.3'
+version = '0.3.4'
 
 long_description = (
     read('README.rst')
