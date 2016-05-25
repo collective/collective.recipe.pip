@@ -71,8 +71,8 @@ class Recipe(object):
                     urls.append(requirement.url)
 
         # Buildout Option values must be strings
-        self.options['eggs'] = "\n".join(sorted(set(eggs))).encode('utf-8')
-        self.options['urls'] = "\n".join(sorted(set(urls))).encode('utf-8')
+        self.options['eggs'] = str("\n".join(sorted(set(eggs))))
+        self.options['urls'] = str("\n".join(sorted(set(urls))))
         versions_part_name = self.options.get('versions')
         if versions_part_name:
             versions_part = self.buildout[versions_part_name]
