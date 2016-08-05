@@ -77,7 +77,7 @@ class Recipe(object):
         if versions_part_name:
             versions_part = self.buildout[versions_part_name]
             for egg, version in versions:
-                versions_part.setdefault(egg, version)
+                versions_part.setdefault(egg, str(version))
 
     def parse_files(self, files):
         """Parse files."""
