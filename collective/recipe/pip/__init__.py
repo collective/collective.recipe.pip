@@ -3,9 +3,15 @@
 import itertools
 import os
 
-from pip import req
 try:
-    from pip.download import PipSession
+    from pip._internal import req
+except ImportError:
+    from pip import req
+try:
+    try:
+        from pip._internal.download import PipSession
+    except ImportError:
+        from pip.download import PipSession
     has_pipsession = True
 except ImportError:
     has_pipsession = False
