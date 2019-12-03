@@ -57,6 +57,9 @@ class Recipe(object):
                 else:
                     version_spec = [(spec.operator, spec.version) for spec in requirement.req.specifier]
                 specs = ','.join([''.join(s) for s in version_spec])
+                if requirement.markers:
+                    if not requirement.markers.evaluate():
+                        continue
                 eggs.append(requirement.name + specs)
             else:
                 specs = None
